@@ -1,50 +1,54 @@
 const submitButton = document.getElementById("btnSubmit");
-const clearButton = document.getElementById("btnClear");
 const tasks = document.getElementById("tasks");
 const messageElement = document.getElementById("message");
+const clearButton = document.getElementById("btnClear");
 
-submitButton.addEventListener("click", addTask);
-clearButton.addEventListener("click", clearList);
+
+submitButton.addEventListener('click', addTask);
 tasks.addEventListener("click", handleTaskClick);
+clearButton.addEventListener("click", clearList);
 
-displayMessage("Good, you have no tasks today!");
+displayMessage("Good, you have no tasks for today!");
 
-function clearList() {
+function clearList(){
     const taskList = tasks.getElementsByClassName("list-group-item");
-    while (taskList.length > 0) {
+    while(taskList.length > 0){
         taskList[0].parentNode.removeChild(taskList[0]);
     }
-    displayMessage("Good, you have no tasks today!");
+        
 }
 
-function handleTaskClick(event) {
+function handleTaskClick(event){
     const style = event.target.style;
-    if (!style.textDecoration) {
-        style.textDecoration = "line-through";
-    } else {
+    if(!style.textDecoration){
+        style.textDecoration = "line-through"
+    }else{
         style.textDecoration = "";
     }
+    
 }
 
-function addTask() {
+function addTask (){
     const newTask = document.getElementById("newTask");
     if(inputIsValid(newTask.value)){
-        tasks.innerHTML += `<li class="list-group-item">${newTask.value}</li>`;
-        messageElement.style.visibility = "hidden";        
+        tasks.innerHTML += '<li class="list-group-item">' + newTask.value + '<li>' 
         newTask.value = "";
+        messageElement.style.visibility = "hidden";
     }else{
-        displayMessage("Please provide non empty input!");
-    }  
+        displayMessage("Please provide non-empty input!")
+    }
+    
 }
 
-function displayMessage(message) {
-    messageElement.style.visibility = "visible";
+function displayMessage(message){
     messageElement.innerText = message;
+    messageElement.style.visibility = "visible";
 }
 
 function inputIsValid(input){
     if(input){
         return true;
     }
+
     return false;
 }
